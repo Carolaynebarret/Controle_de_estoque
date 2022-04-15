@@ -1,1 +1,26 @@
-<h1>Listar pagamento</h1>
+<h1>Listar produtos</h1>
+
+{{#each produtos}}
+  Nome:
+  {{nome}}
+  <br />
+  Quantidade:
+  {{quantidade}}
+  <br />
+  Preço:
+  {{preco}}
+  <br />
+  Prateleira:
+  {{prateleira}}
+  <br />
+  Descricao:
+  {{descricao}}
+  <br />
+  Categoria:
+  {{categoria}}
+  <br />
+  Cadastrado:
+  {{#formatDate createdAt}}{{/formatDate}}
+  <br />
+  <br />
+{{/each}}

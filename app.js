@@ -3,16 +3,30 @@ const app = express();
 const handlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
 const Produtos = require("./models/Produtos");
+const moment = require("moment");
 
-app.engine("handlebars", handlebars({ defaultLayout: "main" }));
+app.engine(
+  "handlebars",
+  handlebars({
+    defaultLayout: "main",
+    helpers: {
+      formatDate: (date) => {
+        return moment(date).format("DD/MM/YYYY");
+      },
+    },
+  })
+);
+
 app.set("view engine", "handlebars");
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 //Rotas
 app.get("/produtos", function (req, res) {
-  res.render("produtos");
+  Produtos.findAll().then(function (produtos) {
+    res.render("produtos", {produtos: produtos});
+  });
 });
 
 app.get("/cad-produtos", function (req, res) {
@@ -29,7 +43,7 @@ app.post("/add-produto", function (req, res) {
     categoria: req.body.categoria,
   })
     .then(function () {
-      res.redirect("/produto");
+      res.redirect("/produtos");
       //res.send("Pagamento cadastro com sucesso!")
     })
     .catch(function (erro) {
