@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 //Rotas
 app.get("/produtos", function (req, res) {
-  Produtos.findAll().then(function (produtos) {
+  Produtos.findAll({order: [["id", "ASC"]]}).then(function (produtos) {
     res.render("produtos", {produtos: produtos});
   });
 });
@@ -52,4 +52,15 @@ app.post("/add-produto", function (req, res) {
   //res.send("Nome: " + req.body.nome + "<br>Valor: " + req.body.valor + "<br>")
 });
 
+app.get("/del-pagamento/:id", function (req, res) {
+  Produtos.destroy({
+    where: {id: req.params.id},
+  })
+    .then(function () {
+      res.redirect("/produtos");
+    })
+    .catch(function (erro) {
+      res.send("Não apagado");
+    });
+});
 app.listen(8081);
