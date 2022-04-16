@@ -4,6 +4,7 @@ const handlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
 const Produtos = require("./models/Produtos");
 const moment = require("moment");
+const path = require("path");
 
 app.engine(
   "handlebars",
@@ -22,7 +23,11 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+//public
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname + "/public"));
 //Rotas
+
 app.get("/produtos", function (req, res) {
   Produtos.findAll({order: [["id", "ASC"]]}).then(function (produtos) {
     res.render("produtos", {produtos: produtos});
@@ -49,6 +54,7 @@ app.post("/add-produto", function (req, res) {
     .catch(function (erro) {
       res.send("Erro: Produto não foi cadastrado com sucesso!" + erro);
     });
+
   //res.send("Nome: " + req.body.nome + "<br>Valor: " + req.body.valor + "<br>")
 });
 
@@ -63,4 +69,5 @@ app.get("/del-pagamento/:id", function (req, res) {
       res.send("Não apagado");
     });
 });
+
 app.listen(8081);

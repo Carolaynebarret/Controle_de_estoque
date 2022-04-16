@@ -1,23 +1,39 @@
 <h1>Formulário para cadastrar produtos</h1>
+<link rel="stylesheet" href="css/estilos.css" />
+ <script src="/js/script.js"></script>
+
 <form action="/add-produto" method="POST">
-  <label>Nome</label>
-  <input type="text" name="nome" /><br /><br />
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Aplicação</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+</head>
 
-  <label>Quantidade</label>
-  <input type="text" name="quantidade" /><br /><br />
+<div id ="wrap" >
+  
+ 
+  <input type="text" name="nome" / placeholder="Nome">
 
-  <label>Preço</label>
-  <input type="text" name="preco" /><br /><br />
 
-  <label>Prateleira</label>
-  <input type="text" name="prateleira" /><br /><br />
+  <input type="number" name="quantidade" /placeholder="Quantidade">
 
-  <label>Descrição</label>
-  <input type="text" name="descricao" /><br /><br />
+  <input type="number" name="preco" /placeholder="Preço">
 
-  <label>Categoria</label>
-  <input type="text" name="categoria" /><br /><br />
 
-  <button type="submit">Cadastrar</button>
+  <input type="text" name="prateleira" /placeholder="Prateleira"> 
 
+
+  <input type="text" name="descricao" / placeholder="Descrição">
+
+  <input type="text" name="categoria" /placeholder="Categoria">
+
+</div>
+ 
+   <div id="botoes">
+         <button class="btn btn success" type="submit">Cadastrar</button>
+       
+   
 </form>
+</body>
