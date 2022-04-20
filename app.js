@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const { engine } = require('express-handlebars');
 const bodyParser = require('body-parser');
-const Produtos = require('./models/Produtos');
+const { Products } = require('./models');
 const moment = require('moment');
 const path = require('path');
 
@@ -29,7 +29,7 @@ app.use(express.static(__dirname + '/public'));
 //Rotas
 
 app.get('/produtos', function (req, res) {
-  Produtos.findAll({ order: [['id', 'ASC']] }).then(function (produtos) {
+  Products.findAll({ order: [['id', 'ASC']] }).then(function (produtos) {
     res.render('produtos', { produtos: produtos });
   });
 });
@@ -39,7 +39,7 @@ app.get('/cad-produtos', function (req, res) {
 });
 
 app.post('/add-produto', function (req, res) {
-  Produtos.create({
+  Products.create({
     nome: req.body.nome,
     quantidade: req.body.quantidade,
     preco: req.body.preco,
@@ -59,7 +59,7 @@ app.post('/add-produto', function (req, res) {
 });
 
 app.get('/del-pagamento/:id', function (req, res) {
-  Produtos.destroy({
+  Products.destroy({
     where: { id: req.params.id },
   })
     .then(function () {

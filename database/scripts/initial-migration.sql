@@ -4,14 +4,14 @@
 -- MySQL Workbench Forward Engineering
 
 
-CREATE TABLE IF NOT EXISTS `produtos` (
+CREATE TABLE IF NOT EXISTS `products` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `quantidade` double  NULL,
-  `preco` double  NULL,
-  `prateleira` VARCHAR(45)  NULL,
-  `descricao` VARCHAR(100)  NULL,
-  `categoria` VARCHAR(100) NOT NULL,
+  `name` VARCHAR(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `amount` double  NULL,
+  `price` double  NULL,
+  `shelf` VARCHAR(45)  NULL,
+  `description` VARCHAR(100)  NULL,
+  `category` VARCHAR(100) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`));
