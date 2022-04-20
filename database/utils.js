@@ -1,6 +1,6 @@
-const fs = require("fs");
+const fs = require('fs');
 
-const model = require("../models");
+const model = require('../models');
 
 module.exports = {
   runSQLFromFile: async (fileName) => {

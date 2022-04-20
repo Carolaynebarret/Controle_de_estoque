@@ -1,4 +1,4 @@
-const { runSQLFromFile } = require("../utils");
+const { runSQLFromFile } = require('../utils');
 
 module.exports = {
   up: async () => {

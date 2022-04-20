@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Produtos = sequelize.define("produtos", {
+  const Produtos = sequelize.define('produtos', {
     nome: DataTypes.STRING,
     quantidade: DataTypes.DOUBLE,
     preco: DataTypes.DOUBLE,
