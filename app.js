@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const handlebars = require("express-handlebars");
+const { engine } = require("express-handlebars");
 const bodyParser = require("body-parser");
 const Produtos = require("./models/Produtos");
 const moment = require("moment");
@@ -8,7 +8,7 @@ const path = require("path");
 
 app.engine(
   "handlebars",
-  handlebars({
+  engine({
     defaultLayout: "main",
     helpers: {
       formatDate: (date) => {
@@ -20,7 +20,7 @@ app.engine(
 
 app.set("view engine", "handlebars");
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //public
@@ -29,8 +29,8 @@ app.use(express.static(__dirname + "/public"));
 //Rotas
 
 app.get("/produtos", function (req, res) {
-  Produtos.findAll({order: [["id", "ASC"]]}).then(function (produtos) {
-    res.render("produtos", {produtos: produtos});
+  Produtos.findAll({ order: [["id", "ASC"]] }).then(function (produtos) {
+    res.render("produtos", { produtos: produtos });
   });
 });
 
@@ -60,7 +60,7 @@ app.post("/add-produto", function (req, res) {
 
 app.get("/del-pagamento/:id", function (req, res) {
   Produtos.destroy({
-    where: {id: req.params.id},
+    where: { id: req.params.id },
   })
     .then(function () {
       res.redirect("/produtos");
