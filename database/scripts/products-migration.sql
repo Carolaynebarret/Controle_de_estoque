@@ -12,14 +12,8 @@ CREATE TABLE IF NOT EXISTS `products` (
   `id_vendor` INT NOT NULL,
   `manufacturing_date` DATETIME NOT NULL,
   `due_date` DATETIME NOT NULL,
-  `purchase_id` INT NOT NULL,
   `vendor_cnpj` INT NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_product_purchase`
-    FOREIGN KEY (`purchase_id`)
-    REFERENCES `purchases` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_product_vendor`
     FOREIGN KEY (`vendor_cnpj`)
     REFERENCES `vendors` (`cnpj`)
