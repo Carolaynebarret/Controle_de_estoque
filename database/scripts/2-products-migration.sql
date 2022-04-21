@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS `products` (
   `manufacturing_date` DATETIME NOT NULL,
   `due_date` DATETIME NOT NULL,
   `vendor_cnpj` INT NOT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_product_vendor`
     FOREIGN KEY (`vendor_cnpj`)

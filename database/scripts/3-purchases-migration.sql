@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS `purchases` (
   `quantity` INT NOT NULL,
   `product_id` INT NOT NULL,
   `vendor_cnpj` INT NOT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_purchase_product`
     FOREIGN KEY (`product_id`)

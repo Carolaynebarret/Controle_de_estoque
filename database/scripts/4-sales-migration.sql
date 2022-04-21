@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS `sales` (
   `date` DATETIME NOT NULL,
   `price` DECIMAL NOT NULL,
   `product_id` INT NOT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_sales_product1`
     FOREIGN KEY (`product_id`)
