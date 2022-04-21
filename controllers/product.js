@@ -17,8 +17,6 @@ module.exports = {
         description: req.body.description,
         category: req.body.category,
         price: req.body.price,
-        lot: req.body.lot,
-        id_vendor: req.body.id_vendor,
         manufacturing_date: req.body.manufacturing_date,
         due_date: req.body.due_date,
         vendor_cnpj: req.body.vendor_cnpj,

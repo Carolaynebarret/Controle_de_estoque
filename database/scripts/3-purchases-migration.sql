@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `purchases` (
   `price` DECIMAL NOT NULL,
   `quantity` INT NOT NULL,
   `product_id` INT NOT NULL,
-  `vendor_cnpj` INT NOT NULL,
+  `vendor_cnpj` VARCHAR(14) NOT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
