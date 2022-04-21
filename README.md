@@ -11,7 +11,7 @@ docker-compose up
 ```
 
 ```bin
-npm install -g sequelize
+npm install -g sequelize-cli
 ```
 
 ```bin
