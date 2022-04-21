@@ -1,73 +1,48 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const handlebars = require("express-handlebars");
-const bodyParser = require("body-parser");
-const Produtos = require("./models/Produtos");
-const moment = require("moment");
-const path = require("path");
+const bodyParser = require('body-parser');
+const { Products } = require('./models');
+const path = require('path');
+const productRoute = require('./routes/product');
 
-app.engine(
-  "handlebars",
-  handlebars({
-    defaultLayout: "main",
-    helpers: {
-      formatDate: (date) => {
-        return moment(date).format("DD/MM/YYYY");
-      },
-    },
-  })
-);
-
-app.set("view engine", "handlebars");
-
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + '/public'));
 
-//public
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(__dirname + "/public"));
-//Rotas
+app.use('/', productRoute);
 
-app.get("/produtos", function (req, res) {
-  Produtos.findAll({order: [["id", "ASC"]]}).then(function (produtos) {
-    res.render("produtos", {produtos: produtos});
-  });
-});
+// app.get('/cad-produtos', function (req, res) {
+//   res.render('cad-produtos');
+// });
 
-app.get("/cad-produtos", function (req, res) {
-  res.render("cad-produtos");
-});
+// app.post('/add-produto', function (req, res) {
+//   Products.create({
+//     nome: req.body.nome,
+//     quantidade: req.body.quantidade,
+//     preco: req.body.preco,
+//     prateleira: req.body.prateleira,
+//     descricao: req.body.descricao,
+//     categoria: req.body.categoria,
+//   })
+//     .then(function () {
+//       res.redirect('/produtos');
+//     })
+//     .catch(function (erro) {
+//       res.send('Erro: Produto não foi cadastrado com sucesso!' + erro);
+//     });
+// });
 
-app.post("/add-produto", function (req, res) {
-  Produtos.create({
-    nome: req.body.nome,
-    quantidade: req.body.quantidade,
-    preco: req.body.preco,
-    prateleira: req.body.prateleira,
-    descricao: req.body.descricao,
-    categoria: req.body.categoria,
-  })
-    .then(function () {
-      res.redirect("/produtos");
-      //res.send("Pagamento cadastro com sucesso!")
-    })
-    .catch(function (erro) {
-      res.send("Erro: Produto não foi cadastrado com sucesso!" + erro);
-    });
-
-  //res.send("Nome: " + req.body.nome + "<br>Valor: " + req.body.valor + "<br>")
-});
-
-app.get("/del-pagamento/:id", function (req, res) {
-  Produtos.destroy({
-    where: {id: req.params.id},
-  })
-    .then(function () {
-      res.redirect("/produtos");
-    })
-    .catch(function (erro) {
-      res.send("Não apagado");
-    });
-});
+// app.get('/del-pagamento/:id', function (req, res) {
+//   Products.destroy({
+//     where: { id: req.params.id },
+//   })
+//     .then(function () {
+//       res.redirect('/produtos');
+//     })
+//     .catch(function (erro) {
+//       res.send('Não apagado');
+//     });
+// });
 
 app.listen(8081);
