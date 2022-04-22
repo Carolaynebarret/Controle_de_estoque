@@ -1,9 +1,11 @@
 import './App.css';
+import 'antd/dist/antd.css';
+import Products from './pages/Products/Products';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">Active Database</header>
+      <Products />
     </div>
   );
 }
