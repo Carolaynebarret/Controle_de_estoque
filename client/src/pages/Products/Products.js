@@ -89,7 +89,7 @@ function Products() {
   ];
 
   return (
-    <div className="Products">
+    <>
       <PageHeader
         ghost={false}
         onBack={() => window.history.back()}
@@ -100,9 +100,9 @@ function Products() {
           </Button>,
         ]}
       ></PageHeader>
-      <Table dataSource={products} columns={columns} />
+      <Table dataSource={products} columns={columns} rowKey="id" />
       <FormProduct isModalVisible={isModalVisible} closeModal={closeModal} onFinish={addProductToList} />
-    </div>
+    </>
   );
 }
 
