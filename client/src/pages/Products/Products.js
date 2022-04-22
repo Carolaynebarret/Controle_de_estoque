@@ -1,9 +1,11 @@
-import { Table } from 'antd';
+import { Table, PageHeader, Button } from 'antd';
 import { useEffect, useState } from 'react';
+import FormProduct from '../../components/FormProduct/FormProduct';
 import { getProducts } from '../../services/products.service';
 
 function Products() {
   const [products, setProducts] = useState([]); // const products = [];
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -13,6 +15,19 @@ function Products() {
 
     fetchProducts();
   }, []);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+
+  const addProductToList = async (product) => {
+    setProducts([...products, product]);
+    closeModal();
+  };
 
   const columns = [
     {
@@ -55,7 +70,18 @@ function Products() {
 
   return (
     <div className="Products">
+      <PageHeader
+        ghost={false}
+        onBack={() => window.history.back()}
+        title="Produtos"
+        extra={[
+          <Button key="1" type="primary" onClick={showModal}>
+            Adicionar
+          </Button>,
+        ]}
+      ></PageHeader>
       <Table dataSource={products} columns={columns} />
+      <FormProduct isModalVisible={isModalVisible} closeModal={closeModal} onFinish={addProductToList} />
     </div>
   );
 }
