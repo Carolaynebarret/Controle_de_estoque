@@ -29,4 +29,13 @@ module.exports = {
       return res.status(500).json({ message: 'SERVER_ERROR', error });
     }
   },
+  async delete(req, res) {
+    const { id } = req.params;
+    try {
+      await Products.destroy({ where: { id } });
+      return res.status(200).json({});
+    } catch (error) {
+      return res.status(500).json({ message: 'SERVER_ERROR', error });
+    }
+  },
 };
