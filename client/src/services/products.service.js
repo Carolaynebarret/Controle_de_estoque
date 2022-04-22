@@ -7,3 +7,7 @@ export const getProducts = () => {
 export const saveProducts = (data) => {
   return api.post('/products', data);
 };
+
+export const deleteProduct = (id) => {
+  return api.delete(`/products/${id}`);
+};

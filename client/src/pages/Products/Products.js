@@ -1,7 +1,8 @@
 import { Table, PageHeader, Button } from 'antd';
 import { useEffect, useState } from 'react';
 import FormProduct from '../../components/FormProduct/FormProduct';
-import { getProducts } from '../../services/products.service';
+import { deleteProduct, getProducts } from '../../services/products.service';
+import { DeleteOutlined } from '@ant-design/icons';
 
 function Products() {
   const [products, setProducts] = useState([]); // const products = [];
@@ -27,6 +28,16 @@ function Products() {
   const addProductToList = async (product) => {
     setProducts([...products, product]);
     closeModal();
+  };
+
+  const removeProduct = async (id) => {
+    await deleteProduct(id);
+
+    const newProducts = [...products];
+    const index = products.findIndex((product) => product.id === id);
+    newProducts.splice(index, 1);
+
+    setProducts(newProducts);
   };
 
   const columns = [
@@ -65,6 +76,15 @@ function Products() {
       title: 'Data de Vencimento',
       dataIndex: 'due_date',
       key: 'due_date',
+    },
+    {
+      title: 'Ações',
+      key: 'action',
+      render: (text, record) => (
+        <Button type="danger" onClick={() => removeProduct(record.id)}>
+          <DeleteOutlined />
+        </Button>
+      ),
     },
   ];
 
